@@ -14,13 +14,13 @@ require('./passport-strategies/bearer');
 require('./db/connect');
 require('dotenv').config();
 
-const apiSignupLogin = require('./routes/Api.register.login');
+const apiAuth = require('./routes/Api.auth');
 const apiCrudRegister = require('./routes/Api.crud.register');
 const apiCrudCompany = require('./routes/Api.crud.company');
 const apiCrudEvent = require('./routes/Api.crud.event');
 const apiCrudTag = require('./routes/Api.crud.tag');
 
-app.use('/api/v1', apiSignupLogin);
+app.use('/api/v1', apiAuth);
 app.use('/api/v1', apiCrudRegister);
 app.use('/api/v1', apiCrudCompany);
 app.use('/api/v1', apiCrudEvent);
