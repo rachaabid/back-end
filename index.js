@@ -8,15 +8,23 @@ app.use(express.urlencoded({extended: true}));
 app.use(cors());
 app.use(morgan('dev'));
 
+app.use('/uploads', express.static('uploads'));
+
 require('./passport-strategies/bearer');
 require('./db/connect');
 require('dotenv').config();
 
 const apiSignupLogin = require('./routes/Api.register.login');
 const apiCrudRegister = require('./routes/Api.crud.register');
+const apiCrudCompany = require('./routes/Api.crud.company');
+const apiCrudEvent = require('./routes/Api.crud.event');
+const apiCrudTag = require('./routes/Api.crud.tag');
 
 app.use('/api/v1', apiSignupLogin);
 app.use('/api/v1', apiCrudRegister);
+app.use('/api/v1', apiCrudCompany);
+app.use('/api/v1', apiCrudEvent);
+app.use('/api/v1', apiCrudTag);
 
 app.listen(process.env.port || 3000, function(){
   console.log('now listening for requests');
