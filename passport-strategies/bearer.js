@@ -1,17 +1,17 @@
 const passport = require('passport');
 const bearerStrategy = require('passport-http-bearer').Strategy;
 const jwt = require('jsonwebtoken');
-const Register = require('../models/register');
+const User = require('../models/register');
 
 passport.use(new bearerStrategy((token, done)=>{
   const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
-  Register.findById(decodedToken.registerId, (err, register)=>{
+  User.findById(decodedToken.registerId, (err, user)=>{
     if(err){
       return done(err);
     }
-    if(!register){
+    if(!user){
       return done(null, false);
     }
-    return done(null, register, {scope: 'all'});
+    return done(null, user, {scope: 'all'});
   })
 }));
