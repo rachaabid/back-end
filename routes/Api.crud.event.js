@@ -14,4 +14,4 @@ routes.put('/Events/:idEvent',  passport.authenticate('bearer', {session: false}
 
 routes.delete('/Events/:idEvent',  passport.authenticate('bearer', {session: false}),deleteEvent);
 
-module.Router = routes;
+module.exports = routes;

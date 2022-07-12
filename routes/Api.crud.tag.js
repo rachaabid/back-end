@@ -14,4 +14,4 @@ routes.put('/Tags/:idTag',  passport.authenticate('bearer', {session: false}),up
 
 routes.delete('/Tags/:idTag',  passport.authenticate('bearer', {session: false}),deleteTag);
 
-module.Router = routes;
+module.exports = routes;
