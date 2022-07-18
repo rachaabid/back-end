@@ -8,7 +8,7 @@ const TagSchema = new Schema({
   },
   description: {
     type: String, 
-    required: [true, 'Descrition is required']
+    required: [true, 'Description is required']
   }
 },
 {
