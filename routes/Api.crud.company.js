@@ -2,17 +2,17 @@ const express = require('express');
 const routes = express.Router();
 const passport = require('passport');
 
-const { createCompany, getCompanys, getCompanyById, update, deleteCompany } = require('../Controlers/CRUD.Company');
+const { createCompany, getCompanies, getCompanyById, update, deleteCompany } = require('../Controlers/CRUD.Company');
 
 
-routes.post('/Companys', passport.authenticate('bearer', {session: false}),createCompany);
+routes.post('/Companies', passport.authenticate('bearer', {session: false}),createCompany);
 
-routes.get('/Companys', passport.authenticate('bearer', {session: false}),getCompanys);
+routes.get('/Companies', passport.authenticate('bearer', {session: false}),getCompanies);
 
-routes.get('/Companys/:idCompany', passport.authenticate('bearer', {session: false}),getCompanyById);
+routes.get('/Companies/:idCompany', passport.authenticate('bearer', {session: false}),getCompanyById);
 
-routes.put('/Companys/:idCompany', passport.authenticate('bearer', {session: false}),update);
+routes.put('/Companies/:idCompany', passport.authenticate('bearer', {session: false}),update);
 
-routes.delete('/Companys/:idCompany', passport.authenticate('bearer', {session: false}),deleteCompany);
+routes.delete('/Companies/:idCompany', passport.authenticate('bearer', {session: false}),deleteCompany);
 
 module.exports = routes;

@@ -19,10 +19,10 @@ exports.createCompany = async (req, res) => {
   }
 }
 
-exports.getCompanys = async (req, res)=>{
+exports.getCompanies = async (req, res)=>{
   try {
-   const companys = await Company.find();
-   res.send(companys);
+   const companies = await Company.find();
+   res.send(companies);
   } catch (error) {
     res.status(500).send({
       message: error.message || 'some error occured'
@@ -43,7 +43,7 @@ exports.getCompanyById = async (req, res)=>{
 
 exports.update = async (req, res)=>{
   try {
-    await Company.findByIdAndUpdate(req.params.idCompany)
+    await Company.findByIdAndUpdate(req.params.idCompany, req.body)
     res.send({message: 'Company updated'});
   } catch (error) {
     res.status(500).send({

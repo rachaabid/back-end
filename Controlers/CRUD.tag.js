@@ -39,7 +39,7 @@ exports.getTagById = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    await Tag.findByIdAndUpdate(req.params.idTag)
+    await Tag.findByIdAndUpdate(req.params.idTag, req.body)
     res.send({ message: 'Tag updated' })
   } catch (error) {
     res.status(500).send({

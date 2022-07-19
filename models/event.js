@@ -11,19 +11,19 @@ const EventSchema = new Schema({
       required: [true, 'Event Description is required']
     },
     startDate: {
-      type: Date,
+      type: String,
       required: [true, 'Date is required']
     },
     endDate: {
-      type: Date,
+      type: String,
       required: [true, 'Date is required']
     },
     startTime: {
-      type: Date,
+      type: String,
       required: [true, 'Time is required']
     },
     endTime: {
-      type: Date,
+      type: String,
       required: [true, 'Time is required']
     },
     photo: {

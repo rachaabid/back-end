@@ -2,20 +2,7 @@ const Event = require('../models/event');
 
 exports.createEvent = async (req, res) => {
   try {
-    const event = {
-      eventName: req.body.eventName,
-      eventDescription: req.body.eventDescription,
-      startDate: req.body.startDate,
-      endDate: req.body.endDate,
-      startTime: req.body.startTime,
-      endTime: req.body.endTime,
-      photo: req.body.photo,
-      price: req.body.price,
-      availableTicketNumber: req.body.availableTicketNumber,
-      eventType: req.body.eventType,
-      location: req.body.location
-    }
-    await Event.create(event)
+    await Event.create(req.body)
     res.send({ message: 'Event created' })
   } catch (error) {
     res.status(500).send({
@@ -48,7 +35,7 @@ exports.getEventById = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    await Event.findByIdAndUpdate(req.params.idEvent)
+    await Event.findByIdAndUpdate(req.params.idEvent, req.body)
     res.send({ message: 'Event updated' })
   } catch (error) {
     res.status(500).send({

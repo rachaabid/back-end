@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const path = require('path');
 
 const CompanySchema = new Schema({
   companyName: {
@@ -24,7 +25,8 @@ const CompanySchema = new Schema({
       required: [true, 'Role is required']
     },
     photo: {
-      type: String
+      type: String,
+      default: path.resolve('/avatar.png'),
     }
 },
 {
