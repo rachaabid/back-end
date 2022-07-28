@@ -18,11 +18,13 @@ const apiAuth = require('./routes/Api.auth');
 const apiCrudCompany = require('./routes/Api.crud.company');
 const apiCrudEvent = require('./routes/Api.crud.event');
 const apiCrudTag = require('./routes/Api.crud.tag');
+const apiUpload = require('./routes/Api.upload');
 
 app.use('/api/v1', apiAuth);
 app.use('/api/v1', apiCrudCompany);
 app.use('/api/v1', apiCrudEvent);
 app.use('/api/v1', apiCrudTag);
+app.use('/api/v1', apiUpload);
 
 app.listen(process.env.port || 3000, function(){
   console.log('now listening for requests');

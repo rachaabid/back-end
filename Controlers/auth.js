@@ -71,7 +71,7 @@ exports.forgotPassword = async (req, res) => {
       token: resetToken,
     }).save();
 
-    const link = `${process.env.companyURL}/resetPassword?token=${resetToken}&id=${companyFound._id}`;
+    const link = `${process.env.dashboardURL}#/resetPassword/${resetToken}/${companyFound._id}`;
     await sendEmail(req.body.email, "Password Reset Request", { companyName: companyFound.companyName, link: link, }, "../template/forgotPassword.html")
     res.json({ message: 'email sent' })
   } catch (error) {
