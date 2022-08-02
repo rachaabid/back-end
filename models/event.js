@@ -44,7 +44,13 @@ const EventSchema = new Schema({
     location: {
       type: String,
       required: [true, 'Location is required']
-    } 
+    },
+    tags:[
+      {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "tag"
+      }
+  ]
 },
 {
   versionKey: false,

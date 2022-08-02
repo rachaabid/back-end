@@ -37,14 +37,13 @@ exports.login = async (req, res) => {
       return res.status(401).send({ message: 'Mail or password is invalid' })
     }
     res.status(200).send({
-      message: {
-        companyId: companyFound._id,
-        token: jwt.sign(
-          { companyId: companyFound._id }, process.env.SECRET_KEY,
-          { expiresIn: '1d' }
-        )
-      }
-    });
+      message: 'logged in succeffuly',
+      token: jwt.sign(
+        { companyId: companyFound._id }, process.env.SECRET_KEY,
+        { expiresIn: '1d' }
+      )
+    }
+    );
   } catch (error) {
     res.status(500).send({
       message: error.message || 'some error occured'
@@ -87,18 +86,18 @@ exports.forgotPassword = async (req, res) => {
 
 exports.resetPassword = async (req, res) => {
   try {
-    const passwordResetToken = await Token.findOne({token: req.params.resetToken});
-  if (!passwordResetToken) {
-    res.status(400).json('Invalid or expired password reset token');
-  }
-  const dateNow = new Date();
-  const tokenDate = new Date(passwordResetToken.createdAt);
-  const diff = dateNow - tokenDate;
-  const seconds = Math.floor( diff/1000);
+    const passwordResetToken = await Token.findOne({ token: req.params.resetToken });
+    if (!passwordResetToken) {
+      res.status(400).json('Invalid or expired password reset token');
+    }
+    const dateNow = new Date();
+    const tokenDate = new Date(passwordResetToken.createdAt);
+    const diff = dateNow - tokenDate;
+    const seconds = Math.floor(diff / 1000);
 
-  if (seconds>900) {
-    res.status(400).json('Invalid or expired password reset token');
-  }
+    if (seconds > 900) {
+      res.status(400).json('Invalid or expired password reset token');
+    }
     let salt = await bcrypt.genSalt(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
 
@@ -107,7 +106,7 @@ exports.resetPassword = async (req, res) => {
       { $set: { password: hash } },
       { new: true }
     );
-    const company = await Company.findById( passwordResetToken.companyId );
+    const company = await Company.findById(passwordResetToken.companyId);
     await sendEmail(
       company.email, "Password Reset Successfully",
       {
@@ -115,14 +114,14 @@ exports.resetPassword = async (req, res) => {
       }, "../template/resetPassword.html"
     );
     await passwordResetToken.deleteOne();
-    res.json({message: 'Password reset'});
-  
- 
+    res.json({ message: 'Password reset' });
+
+
   } catch (error) {
     console.log(error)
     res.status(500).send({
       message: error.message || 'some error occured'
     });
   }
-  
+
 }
