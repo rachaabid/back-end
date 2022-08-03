@@ -26,8 +26,15 @@ const CompanySchema = new Schema({
     },
     photo: {
       type: String,
-      default: path.resolve('/avatar.png'),
-    }
+      default: 'https://imgur.com/a/0IU7J2q',
+      required: [true, 'photo is required']
+    },
+    events:[
+      {
+          type: Schema.Types.ObjectId,
+          ref: "event"
+      }
+  ]
 },
 {
   versionKey: false,

@@ -1,6 +1,6 @@
 const express = require('express');
 const routes = express.Router();
-// const passport = require('passport');
+ const passport = require('passport');
 const path = require('path');
 const multer = require('multer');
 
@@ -29,23 +29,23 @@ const { createCompany, getCompanies, getCompanyById, update, deleteCompany } = r
 
 
 routes.post('/Companies',
-  // passport.authenticate('bearer', {session: false}),
+   passport.authenticate('bearer', {session: false}),
   upload.single('photo'), createCompany);
 
 routes.get('/Companies',
-  // passport.authenticate('bearer', {session: false}),
+  passport.authenticate('bearer', {session: false}),
   getCompanies);
 
 routes.get('/Companies/:idCompany',
-  // passport.authenticate('bearer', {session: false}),
+   passport.authenticate('bearer', {session: false}),
   getCompanyById);
 
 routes.put('/Companies/:idCompany',
-  // passport.authenticate('bearer', {session: false}),
+   passport.authenticate('bearer', {session: false}),
   upload.single('photo'), update);
 
 routes.delete('/Companies/:idCompany',
-  // passport.authenticate('bearer', {session: false}),
+   passport.authenticate('bearer', {session: false}),
   deleteCompany);
 
 module.exports = routes;

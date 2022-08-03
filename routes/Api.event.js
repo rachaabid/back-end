@@ -23,32 +23,31 @@ function fileFilter(req, file, cb) {
   cb(null, acceptedExtensions.includes(fileExtension))
 }
 
-const upload = multer({ storage: storage, fileFilter: fileFilter })
+const upload = multer({ storage: storage, fileFilter: fileFilter, limits: {fileSize: 1024*1024*20}})
 
 const { createEvent, getEvents, getEventById, update, deleteEvent, getTagsForEvents } = require('../Controlers/Event');
 
-routes.post('/Events', 
-//  passport.authenticate('bearer', {session: false}), 
+routes.post('/Events',  passport.authenticate('bearer', {session: false}), 
 upload.single('photo'), createEvent);
 
 routes.get('/Events',  
-// passport.authenticate('bearer', {session: false}),
+ passport.authenticate('bearer', {session: false}),
 getEvents);
 
 routes.get('/Events/:idEvent', 
-//  passport.authenticate('bearer', {session: false}),
+  passport.authenticate('bearer', {session: false}),
 getEventById);
 
 routes.put('/Events/:idEvent', 
-//  passport.authenticate('bearer', {session: false}), 
+  passport.authenticate('bearer', {session: false}), 
 upload.single('photo'), update);
 
 routes.delete('/Events/:idEvent', 
-//  passport.authenticate('bearer', {session: false}),
+  passport.authenticate('bearer', {session: false}),
  deleteEvent);
 
  routes.get('/listTags',  
-//  passport.authenticate('bearer', {session: false}),
+  passport.authenticate('bearer', {session: false}),
  getTagsForEvents);
 
 module.exports = routes;

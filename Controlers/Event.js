@@ -1,9 +1,12 @@
 const Event = require('../models/event');
 const Tag = require('../models/tag')
+const Company = require('../models/company')
 
 exports.createEvent = async (req, res) => {
   try {
     const event = await Event.create(req.body)
+    await Company.findByIdAndUpdate(req.user._id, {$push: {events: event._id}}, {new: true});
+
     res.send({ message: 'Event created' })
   } catch (error) {
     res.status(500).send({
@@ -49,6 +52,7 @@ exports.update = async (req, res) => {
 exports.deleteEvent = async (req, res) => {
   try {
     await Event.findByIdAndRemove(req.params.idEvent)
+    await Company.findByIdAndUpdate(req.user._id, {$pull: {events: req.params.idEvent}}, {new: true});
     res.send({ message: 'Event deleted' })
   } catch (error) {
     res.status(500).send({

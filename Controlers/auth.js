@@ -39,7 +39,7 @@ exports.login = async (req, res) => {
     res.status(200).send({
       message: 'logged in succeffuly',
       token: jwt.sign(
-        { companyId: companyFound._id }, process.env.SECRET_KEY,
+        { companyId: companyFound._id, role: companyFound.role }, process.env.SECRET_KEY,
         { expiresIn: '1d' }
       )
     }

@@ -2,7 +2,7 @@ const Company = require('../models/company');
 
 exports.createCompany = async (req, res) => {
   try {
-    await Company.create(req.body);
+   await Company.create(req.body);
     res.send({message: 'Company created'})
   } catch (error) {
     res.status(500).send({
@@ -13,7 +13,8 @@ exports.createCompany = async (req, res) => {
 
 exports.getCompanies = async (req, res)=>{
   try {
-   const companies = await Company.find();
+   const companies = await Company.find().populate('events');
+   console.log(companies)
    res.send(companies);
   } catch (error) {
     res.status(500).send({
@@ -35,7 +36,7 @@ exports.getCompanyById = async (req, res)=>{
 
 exports.update = async (req, res)=>{
   try {
-    await Company.findByIdAndUpdate(req.params.idCompany, req.body)
+   await Company.findByIdAndUpdate(req.params.idCompany, req.body);
     res.send({message: 'Company updated'});
   } catch (error) {
     res.status(500).send({
