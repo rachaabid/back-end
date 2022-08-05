@@ -2,6 +2,9 @@ const Company = require('../models/company');
 
 exports.createCompany = async (req, res) => {
   try {
+    if(req.body.photo == ''){
+      req.body.photo = 'https://i.imgur.com/I65uxQr.png'
+    }
    await Company.create(req.body);
     res.send({message: 'Company created'})
   } catch (error) {

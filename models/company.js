@@ -26,7 +26,7 @@ const CompanySchema = new Schema({
     },
     photo: {
       type: String,
-      default: 'https://imgur.com/a/0IU7J2q.png',
+      default: 'https://i.imgur.com/I65uxQr.png',
       required: [true, 'photo is required']
     },
     events:[

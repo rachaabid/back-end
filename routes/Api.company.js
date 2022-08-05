@@ -23,7 +23,7 @@ function fileFilter(req, file, cb) {
   cb(null, acceptedExtensions.includes(fileExtension))
 }
 
-const upload = multer({ storage: storage, fileFilter: fileFilter })
+const upload = multer({ storage: storage, fileFilter: fileFilter, limits: {fieldSize: 25*1024*1024} })
 
 const { createCompany, getCompanies, getCompanyById, update, deleteCompany } = require('../Controlers/Company');
 
