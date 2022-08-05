@@ -23,12 +23,12 @@ function fileFilter(req, file, cb) {
   cb(null, acceptedExtensions.includes(fileExtension))
 }
 
-const upload = multer({ storage: storage, fileFilter: fileFilter, limits: {fileSize: 1024*1024*20}})
+const upload = multer({ storage: storage, fileFilter: fileFilter})
 
 const { createEvent, getEvents, getEventById, update, deleteEvent, getTagsForEvents } = require('../Controlers/Event');
 
-routes.post('/Events',  passport.authenticate('bearer', {session: false}), 
-upload.single('photo'), createEvent);
+routes.post('/Events',  [passport.authenticate('bearer', {session: false}), 
+upload.single('photo')], createEvent);
 
 routes.get('/Events',  
  passport.authenticate('bearer', {session: false}),
@@ -39,8 +39,8 @@ routes.get('/Events/:idEvent',
 getEventById);
 
 routes.put('/Events/:idEvent', 
-  passport.authenticate('bearer', {session: false}), 
-upload.single('photo'), update);
+  [passport.authenticate('bearer', {session: false}), 
+upload.single('photo')], update);
 
 routes.delete('/Events/:idEvent', 
   passport.authenticate('bearer', {session: false}),

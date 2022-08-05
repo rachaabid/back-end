@@ -29,8 +29,8 @@ const { createCompany, getCompanies, getCompanyById, update, deleteCompany } = r
 
 
 routes.post('/Companies',
-   passport.authenticate('bearer', {session: false}),
-  upload.single('photo'), createCompany);
+  [ passport.authenticate('bearer', {session: false}),
+  upload.single('photo')], createCompany);
 
 routes.get('/Companies',
   passport.authenticate('bearer', {session: false}),
@@ -41,8 +41,8 @@ routes.get('/Companies/:idCompany',
   getCompanyById);
 
 routes.put('/Companies/:idCompany',
-   passport.authenticate('bearer', {session: false}),
-  upload.single('photo'), update);
+  [ passport.authenticate('bearer', {session: false}),
+  upload.single('photo')], update);
 
 routes.delete('/Companies/:idCompany',
    passport.authenticate('bearer', {session: false}),

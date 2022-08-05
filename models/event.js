@@ -27,7 +27,9 @@ const EventSchema = new Schema({
       required: [true, 'Time is required']
     },
     photo: {
-      type: String
+      type: String,
+      default: 'https://i.imgur.com/I65uxQr.png',
+      required: [true, 'photo is required']
     },
     price: {
       type: String,
