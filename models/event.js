@@ -32,8 +32,7 @@ const EventSchema = new Schema({
       required: [true, 'photo is required']
     },
     price: {
-      type: String,
-      required: [true, 'Price is required']
+      type: String
     },
     availableTicketNumber: {
       type: Number,
@@ -49,11 +48,15 @@ const EventSchema = new Schema({
     },
     tags:[
       {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "tag"
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "tag"
       }
-  ]
-},
+    ],
+    company:{   
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "company"  
+    }
+  },
 {
   versionKey: false,
   timestamps: true

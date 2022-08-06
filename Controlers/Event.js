@@ -4,6 +4,9 @@ const Company = require('../models/company')
 
 exports.createEvent = async (req, res) => {
   try {
+    if(req.body.photo == ''){
+      req.body.photo = 'https://i.imgur.com/I65uxQr.png'
+    }
     const event = await Event.create(req.body)
     await Company.findByIdAndUpdate(req.user._id, {$push: {events: event._id}}, {new: true});
 
@@ -51,8 +54,8 @@ exports.update = async (req, res) => {
 
 exports.deleteEvent = async (req, res) => {
   try {
-    await Event.findByIdAndRemove(req.params.idEvent)
-    await Company.findByIdAndUpdate(req.user._id, {$pull: {events: req.params.idEvent}}, {new: true});
+    const eventDeleted = await Event.findByIdAndRemove(req.params.idEvent)
+    await Company.findByIdAndUpdate(req.user._id, {$pull: {events: eventDeleted._id}}, {new: true});
     res.send({ message: 'Event deleted' })
   } catch (error) {
     res.status(500).send({
