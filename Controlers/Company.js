@@ -16,7 +16,7 @@ exports.createCompany = async (req, res) => {
 
 exports.getCompanies = async (req, res)=>{
   try {
-   const companies = await Company.find().populate('events');
+   const companies = await Company.find();
    console.log(companies)
    res.send(companies);
   } catch (error) {
@@ -28,7 +28,7 @@ exports.getCompanies = async (req, res)=>{
 
 exports.getCompanyById = async (req, res)=>{
   try {
-    const company = await Company.findById(req.params.idCompany)
+    const company = await Company.findById(req.params.idCompany).populate('events');
     res.send(company);
   } catch (error) {
     res.status(500).send({

@@ -46,16 +46,16 @@ const EventSchema = new Schema({
       type: String,
       required: [true, 'Location is required']
     },
+    company:{   
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "company"  
+    },
     tags:[
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "tag"
       }
-    ],
-    company:{   
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "company"  
-    }
+    ]
   },
 {
   versionKey: false,
