@@ -30,11 +30,11 @@ exports.login = async (req, res) => {
   try {
     const companyFound = await Company.findOne({ email: req.body.email });
     if (!companyFound) {
-      return res.status(401).send({ message: 'Mail or password is invalid' });
+      return res.status(400).send({ message: 'Mail or password is invalid' });
     }
     const valid = bcrypt.compare(req.body.password, companyFound.password)
     if (!valid) {
-      return res.status(401).send({ message: 'Mail or password is invalid' })
+      return res.status(400).send({ message: 'Mail or password is invalid' })
     }
     res.status(200).send({
       message: 'logged in succeffuly',
