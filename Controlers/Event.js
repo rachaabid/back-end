@@ -54,8 +54,8 @@ exports.update = async (req, res) => {
 
 exports.deleteEvent = async (req, res) => {
   try {
-    const eventDeleted = await Event.findByIdAndRemove(req.params.idEvent)
-    await Company.findByIdAndUpdate(req.user._id, {$pull: {events: eventDeleted._id}}, {new: true});
+    await Company.findByIdAndUpdate(req.user._id, {$pull: {events: req.params.idEvent}}, {new: true});
+    await Event.findByIdAndRemove(req.params.idEvent)
     res.send({ message: 'Event deleted' })
   } catch (error) {
     res.status(500).send({
