@@ -19,7 +19,6 @@ exports.signup = async (req, res) => {
       res.json({ message: 'Company created' });
     }
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       message: error.message || 'some error occured'
     });
@@ -74,7 +73,6 @@ exports.forgotPassword = async (req, res) => {
     await sendEmail(req.body.email, "Password Reset Request", { companyName: companyFound.companyName, link: link, }, "../template/forgotPassword.html")
     res.json({ message: 'email sent' })
   } catch (error) {
-    console.log(error)
     res.status(500).send({
       message: error.message || 'some error occured'
     });
@@ -118,7 +116,6 @@ exports.resetPassword = async (req, res) => {
 
 
   } catch (error) {
-    console.log(error)
     res.status(500).send({
       message: error.message || 'some error occured'
     });

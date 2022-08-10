@@ -4,15 +4,15 @@ const Schema = mongoose.Schema;
 const reservationSchema = new Schema({
   firstName: {
     type: String,
-    required: [true, 'Name fiels is required'],
+    required: [true, 'firstName fiels is required'],
 },
 lastName: {
     type: String,
-     required: [true, 'Description is required'],
+     required: [true, 'lastName is required'],
 },
 email: {
     type: String,
-     required: [true, 'Description is required'],
+     required: [true, 'Email is required'],
 },
 },
 {
