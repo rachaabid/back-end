@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
-const { schema } = require('./company');
 const Schema = mongoose.Schema;
 
-const reservationSchema = new schema({
+const reservationSchema = new Schema({
   firstName: {
     type: String,
     required: [true, 'Name fiels is required'],
