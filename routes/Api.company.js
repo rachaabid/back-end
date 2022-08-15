@@ -1,5 +1,5 @@
 const express = require('express');
-const routes = express.Router();
+const router = express.Router();
  const passport = require('passport');
 const path = require('path');
 const multer = require('multer');
@@ -28,24 +28,24 @@ const upload = multer({ storage: storage, fileFilter: fileFilter, limits: {field
 const { createCompany, getCompanies, getCompanyById, update, deleteCompany } = require('../Controlers/Company');
 
 
-routes.post('/Companies',
+router.post('/Companies',
   [ passport.authenticate('bearer', {session: false}),
   upload.single('photo')], createCompany);
 
-routes.get('/Companies',
+router.get('/Companies',
   passport.authenticate('bearer', {session: false}),
   getCompanies);
 
-routes.get('/Companies/:idCompany',
+router.get('/Companies/:idCompany',
    passport.authenticate('bearer', {session: false}),
   getCompanyById);
 
-routes.put('/Companies/:idCompany',
+router.put('/Companies/:idCompany',
   [ passport.authenticate('bearer', {session: false}),
   upload.single('photo')], update);
 
-routes.delete('/Companies/:idCompany',
+router.delete('/Companies/:idCompany',
    passport.authenticate('bearer', {session: false}),
   deleteCompany);
 
-module.exports = routes;
+module.exports = router;

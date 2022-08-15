@@ -1,27 +1,27 @@
 const express = require('express');
-const routes = express.Router();
+const router = express.Router();
 const passport = require('passport');
 
 const { createTag, getTags, getTagById, update, deleteTag } = require('../Controlers/Tag');
 
-routes.post('/Tags',  
+router.post('/Tags',  
  passport.authenticate('bearer', {session: false}),
 createTag);
 
-routes.get('/Tags',  
+router.get('/Tags',  
  passport.authenticate('bearer', {session: false}),
 getTags);
 
-routes.get('/Tags/:idTag',  
+router.get('/Tags/:idTag',  
  passport.authenticate('bearer', {session: false}),
 getTagById);
 
-routes.put('/Tags/:idTag',  
+router.put('/Tags/:idTag',  
  passport.authenticate('bearer', {session: false}),
 update);
 
-routes.delete('/Tags/:idTag',  
+router.delete('/Tags/:idTag',  
  passport.authenticate('bearer', {session: false}),
 deleteTag);
 
-module.exports = routes;
+module.exports = router;

@@ -79,17 +79,17 @@ exports.getTagsForEvents = async (req, res)=>{
   }
 }
 
-exports.uploadImageEvent = async (req, res) => {
+exports.getNotStartedEvents = async (req, res)=>{
   try {
-    if(req.file != undefined){
-      res.send({message: 'file uploaded successfully'});
-    }
-    else {
-      res.status(400).send({message:'file not uploaded'})
-    }
+    const events = await Event.find();
+    const curentDate = new Date();
+    const eventsFiltred =  events.filter(event=>
+     new Date(event.startDate)>= curentDate
+    )
+    res.json(eventsFiltred);
   } catch (error) {
     res.status(500).send({
-      message: error.message || 'some error occured while uploaded'
+      message: error.message || 'some error occured'
     });
   }
 }
