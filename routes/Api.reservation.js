@@ -4,7 +4,7 @@ const passport = require('passport');
 
 const { createReservation } = require('../Controlers/Reservation');
 
-router.post('/Reservations/id',  
+router.post('/Reservation/:idEvent',  
  passport.authenticate('bearer', {session: false}),
 createReservation);
 

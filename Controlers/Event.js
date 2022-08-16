@@ -83,8 +83,9 @@ exports.getNotStartedEvents = async (req, res)=>{
   try {
     const events = await Event.find();
     const curentDate = new Date();
+    console.log(curentDate.getDate())
     const eventsFiltred =  events.filter(event=>
-     new Date(event.startDate)>= curentDate
+     new Date(event.startDate)== curentDate ? '': '' 
     )
     res.json(eventsFiltred);
   } catch (error) {
