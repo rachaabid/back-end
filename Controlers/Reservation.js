@@ -13,7 +13,7 @@ exports.createReservation = async (req, res) => {
       const reservation = await Reservation.create(req.body);
       const filePath = path.resolve('./template/reservation.html');
       var templateReservation = fs.readFileSync(filePath, { encoding: 'utf-8' });
-      options = { firstName: req.body.firstName, lastName: req.body.lastName, email: req.body.email }
+      options = { firstName: req.body.firstName, lastName: req.body.lastName, email: req.body.email, eventName: event.eventName, startDate: event.startDate, startTime: event.startTime, endDate: event.endDate, endTime: event.endTime }
       const render = ejs.render(templateReservation, options);
 
       var document = {

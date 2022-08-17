@@ -81,12 +81,20 @@ exports.getTagsForEvents = async (req, res)=>{
 
 exports.getNotStartedEvents = async (req, res)=>{
   try {
-    const events = await Event.find();
+    const events = await Event.find().populate('tags');
     const curentDate = new Date();
-    console.log(curentDate.getDate())
+    console.log(curentDate.getHours())
     const eventsFiltred =  events.filter(event=>
-     new Date(event.startDate)== curentDate ? '': '' 
+     (new Date(event.startDate).getMonth()+1 == curentDate.getMonth()+1
+      && new Date(event.startDate).getDate() == curentDate.getDate() 
+      && Number(event.startTime.substring(0,2)) > curentDate.getHours()) 
+
+      || ((new Date(event.startDate).getMonth()+1 == curentDate.getMonth()+1 
+      && new Date(event.startDate).getDate() > curentDate.getDate())) 
+
+      || (new Date(event.startDate).getMonth()+1 > curentDate.getMonth()+1)
     )
+    console.log(new Date(events[0].startDate).getDate())
     res.json(eventsFiltred);
   } catch (error) {
     res.status(500).send({
