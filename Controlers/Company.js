@@ -1,7 +1,6 @@
 const Company = require('../models/company');
 const Event = require('../models/event')
 const bcrypt = require('bcryptjs');
-const { findById } = require('../models/company');
 
 exports.createCompany = async (req, res) => {
   try {
